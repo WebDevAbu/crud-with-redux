@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import TableCom from "./components/TableCom";
+import ModalCom from "./components/ModalCom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
+const App = () => {
+  const [newUser, setNewUser] = useState({
+    firstName: "",
+    lastName: "",
+    address: {
+      phoneNo: "",
+      city: "",
+    },
+  });
+  const [show, setShow] = useState(false);
+  const [check, setCheck] = useState("");
+  const [editIndex, setEditIndex] = useState("");
+  console.log("show", show);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>
+        <TableCom
+          setShow={setShow}
+          newUser={newUser}
+          setNewUser={setNewUser}
+          check={check}
+          setCheck={setCheck}
+          setEditIndex={setEditIndex}
+        />
+        {show && (
+          <ModalCom
+            setShow={setShow}
+            newUser={newUser}
+            setNewUser={setNewUser}
+            check={check}
+            setCheck={setCheck}
+            editIndex={editIndex}
+          />
+        )}
+      </div>
+    </>
   );
-}
+};
 
 export default App;
